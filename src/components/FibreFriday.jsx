@@ -1,6 +1,7 @@
+// src/components/FibreFriday.jsx
 import React from "react";
 import ProductCard from "./ProductCard";
-import categoryImage from "../assets/images/categoryImage.svg"; 
+import categoryImage from "../assets/images/categoryImage.svg";
 
 const FibreFriday = () => {
   // Sample product data
@@ -13,7 +14,6 @@ const FibreFriday = () => {
       originalPrice: "220",
       rating: 5,
       reviews: 47,
-      
     },
     {
       id: 2,
@@ -45,10 +45,10 @@ const FibreFriday = () => {
 
   return (
     <div className="py-4">
-      <div className="overflow-x-auto pb-4">
-        <div className="flex space-x-4" style={{ minWidth: "max-content" }}>
+      <div className="pb-4">
+        <div className="flex space-x-2" style={{ minWidth: "100%" }}>
           {products.map((product) => (
-            <div key={product.id} className="min-w-64">
+            <div key={product.id} className="min-w-56">
               <ProductCard
                 image={product.image}
                 title={product.title}
