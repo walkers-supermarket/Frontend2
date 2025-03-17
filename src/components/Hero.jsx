@@ -1,3 +1,4 @@
+// src/components/Hero.jsx
 import React, { useState, useEffect } from "react";
 import { ChevronRightIcon } from "@heroicons/react/16/solid";
 import { Link } from "react-router-dom";
@@ -60,8 +61,8 @@ const Hero = () => {
   };
 
   return (
-    <div className="flex w-full">
-      <div className="w-1/4 bg-white p-4 border-r">
+    <div className="flex  w-full">
+      <div className="w-[20%] ml-[6%] bg-white p-4  border-gray-200 border-r">
         <ul className="space-y-4">
           {menuItems.map((item, index) => (
             <li
@@ -82,7 +83,7 @@ const Hero = () => {
       </div>
 
       <div className="w-3/4 relative">
-        <div className="relative h-96 overflow-hidden">
+        <div className="relative h-[80%] max-w-[80%] mt-[5%] mx-[10%] my-auto overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-in-out h-full"
             style={{ transform: `translateX(-${activeSlide * 100}%)` }}
@@ -92,7 +93,7 @@ const Hero = () => {
                 key={index}
                 className={`flex-shrink-0 w-full h-full ${slide.bgColor}`}
               >
-                <div className="relative h-full overflow-hidden">
+                <div className="relative h-full overflow-hidden ">
                   <div className="absolute inset-0 flex items-center">
                     <div className="h-full w-full relative">
                       <div className="absolute top-1/4 left-16 text-white z-10">
@@ -115,7 +116,7 @@ const Hero = () => {
                         <img
                           src={CarouselImage}
                           alt="Groceries in paper bag"
-                          className="h-full object-cover"
+                          className="h-full w-[84%]  ml-[25%] "
                         />
                       </div>
                     </div>
@@ -137,6 +138,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
+    
     </div>
   );
 };

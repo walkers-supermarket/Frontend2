@@ -39,16 +39,16 @@ const Navbar = () => {
           </select>
         </div>
       </div>
-      <header className="header flex justify-between items-center px-8 py-4 bg-white border-b border-gray-200">
+      <header className="header flex justify-between items-center px-8 py-3 bg-white border-b border-gray-200">
         <Link to="/">
-          <img src={logo} alt="logo" className="w-[233px] h-[81px]" />
+          <img src={logo} alt="logo" className="w-[233px] h-[81px]  ml-[5%] " />
         </Link>
         <nav className="flex gap-6">
           {customMenu.map((item) => (
             <Link
               key={item.id}
               to={item.url}
-              className="header-menu-item hover:underline"
+              className="header-menu-item text-sm font-semibold hover:underline"
             >
               {item.title}
             </Link>
