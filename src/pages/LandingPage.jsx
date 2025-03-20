@@ -5,6 +5,9 @@ import Hero from "../components/Hero";
 import Subscription from "../components/Subscription";
 import Categories from "../components/Categories";
 import Favourites from "../components/Favorites";
+import CampaignBanner from "../components/CampaignBanner ";
+
+
 
 const LandingPage = () => {
   return (
@@ -13,7 +16,9 @@ const LandingPage = () => {
           <Hero />
           <Subscription />
           <Categories />
-          <Favourites/>
+          <Favourites />
+          <CampaignBanner />
+       
           <Footer/>
     </div>
   );
