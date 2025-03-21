@@ -1,46 +1,40 @@
-
 import React from "react";
+// Import social media icons from react-icons
+import { FaInstagram, FaSnapchat, FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
-  // Function to scroll to the top of the page
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <footer className="bg-black text-white py-8 relative">
+    <footer className="bg-black text-white py-8">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Exclusive Section */}
+        {/* Column 1: Exclusive Subscribe */}
         <div>
           <h3 className="text-lg font-bold mb-4">Exclusive</h3>
-          <p className="mb-4">Get 10% off your order</p>
-          <div className="flex">
+          <h4 className="text-base font-semibold mb-2">Subscribe</h4>
+          <p className="text-sm mb-4">Get 10% off your first order</p>
+          <div className="flex items-center border border-gray-500 rounded">
             <input
               type="email"
               placeholder="Enter your email"
-              className="p-2 rounded-l bg-gray-800 text-white border-none focus:outline-none"
+              className="bg-transparent text-white placeholder-gray-400 p-2 w-full outline-none"
             />
-            <button className="bg-purple-600 p-2 rounded-r">➔</button>
+            <button className="bg-gray-700 text-white px-4 py-2 rounded-r hover:bg-gray-600 transition">
+              Subscribe
+            </button>
           </div>
         </div>
 
-        {/* Support Section */}
+        {/* Column 2: Contact */}
         <div>
-          <h3 className="text-lg font-bold mb-4">Support</h3>
-          <ul className="space-y-2">
-            <li>111 Bijoy sarani, Dhaka, DH 1515</li>
-            <li>exclusive@gmail.com</li>
-            <li>+88015-88888-9999</li>
-          </ul>
+          <h3 className="text-lg font-bold mb-4">Contact</h3>
+          <p className="text-sm mb-2">The company physical address</p>
+          <p className="text-sm mb-2">exclusive@gmail.com</p>
+          <p className="text-sm">+88015-88888-9999</p>
         </div>
 
-        {/* My Account Section */}
+        {/* Column 3: My Account */}
         <div>
           <h3 className="text-lg font-bold mb-4">My Account</h3>
-          <ul className="space-y-2">
+          <ul className="text-sm space-y-2">
             <li>Login / Register</li>
             <li>Cart</li>
             <li>Wishlist</li>
@@ -48,43 +42,55 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Quick Links Section */}
+        {/* Column 4: Quick Link */}
         <div>
-          <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-          <ul className="space-y-2">
+          <h3 className="text-lg font-bold mb-4">Quick Link</h3>
+          <ul className="text-sm space-y-2">
+            <li>About</li>
+            <li>Privacy Policy</li>
             <li>Terms Of Use</li>
             <li>FAQ</li>
-            <li>Privacy Policy</li>
-            <li>Contact</li>
           </ul>
         </div>
       </div>
 
-      {/* Copyright Notice */}
-      <div className="text-center mt-8 text-gray-400">
-        © Copyright Walter Supermarket 2023. All rights reserved.
+      {/* Social Media Icons */}
+      <div className="max-w-6xl mx-auto px-4 mt-8 flex justify-center space-x-6">
+        {/* Instagram Icon */}
+        <a
+          href="https://www.instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white hover:text-gray-400 transition"
+        >
+          <FaInstagram className="h-6 w-6" />
+        </a>
+
+        {/* Snapchat Icon */}
+        <a
+          href="https://www.snapchat.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white hover:text-gray-400 transition"
+        >
+          <FaSnapchat className="h-6 w-6" />
+        </a>
+
+        {/* Facebook Icon */}
+        <a
+          href="https://www.facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white hover:text-gray-400 transition"
+        >
+          <FaFacebook className="h-6 w-6" />
+        </a>
       </div>
 
-      {/* Scroll to Top Arrow */}
-      <button
-        onClick={scrollToTop}
-        className="absolute bottom-4 right-4 bg-purple-600 text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 15l7-7 7 7"
-          />
-        </svg>
-      </button>
+      {/* Copyright Notice */}
+      <div className="max-w-6xl mx-auto px-4 mt-4 border-t border-gray-700 pt-4 text-center text-sm text-gray-400">
+        © Copyright Walker Supermarket 2025. All right reserved
+      </div>
     </footer>
   );
 };

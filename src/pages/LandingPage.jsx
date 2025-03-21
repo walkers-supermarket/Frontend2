@@ -6,6 +6,8 @@ import Subscription from "../components/Subscription";
 import Categories from "../components/Categories";
 import Favourites from "../components/Favorites";
 import CampaignBanner from "../components/CampaignBanner ";
+import ShopAndSave from "../components/ShopAndSave";
+import FibreFridayDeals from "../components/FibreFridayDeals";
 
 
 
@@ -17,7 +19,9 @@ const LandingPage = () => {
           <Subscription />
           <Categories />
           <Favourites />
-          <CampaignBanner />
+      <CampaignBanner />
+      <ShopAndSave />
+      <FibreFridayDeals/>
        
           <Footer/>
     </div>
