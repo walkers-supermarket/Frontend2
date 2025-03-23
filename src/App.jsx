@@ -6,6 +6,11 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ManageAccountPage from "./pages/ManageAccountPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import SinglePage from "./pages/SinglePage";
 
 function App() {
    const router = createBrowserRouter([
@@ -29,6 +34,27 @@ function App() {
      path: "/contact",
     element: <ContactPage />,
    },
+   {
+     path: "/forgot-password",
+    element: <ForgotPasswordPage />,
+   },
+   {
+     path: "/account",
+    element: <ManageAccountPage />,
+   },
+   {
+     path: "/cart",
+    element: <CartPage />,
+   },
+   {
+     path: "/checkout",
+    element: <CheckoutPage />,
+     },
+   {
+     path: "/single",
+    element: <SinglePage/>,
+     },
+   
  ]);
    return <RouterProvider router={router} />;
   

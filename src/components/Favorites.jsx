@@ -28,7 +28,7 @@ const Favorites= () => {
         {" "}
         {/* Align content to the left */}
         {/* Tabs */}
-        <div className="flex justify-start space-x-3 border-b border-gray-200 mb-6">
+        <div className="flex justify-start space-x-9  border-gray-200 mb-6">
           {["Best Sellers", "New Stock", "Fibre Friday"].map((tab) => (
             <button
               key={tab}

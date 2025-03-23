@@ -1,10 +1,18 @@
 import React from "react";
-// Import social media icons from react-icons
-import { FaInstagram, FaSnapchat, FaFacebook } from "react-icons/fa";
+// Import social media icons and arrow icon from react-icons
+import { FaInstagram, FaSnapchat, FaFacebook, FaArrowUp } from "react-icons/fa";
 
 const Footer = () => {
+  // Function to scroll to the top of the page
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Smooth scrolling effect
+    });
+  };
+
   return (
-    <footer className="bg-black text-white py-8">
+    <footer className="bg-black text-white py-8 relative">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Column 1: Exclusive Subscribe */}
         <div>
@@ -56,7 +64,6 @@ const Footer = () => {
 
       {/* Social Media Icons */}
       <div className="max-w-6xl mx-auto px-4 mt-8 flex justify-center space-x-6">
-        {/* Instagram Icon */}
         <a
           href="https://www.instagram.com"
           target="_blank"
@@ -65,8 +72,6 @@ const Footer = () => {
         >
           <FaInstagram className="h-6 w-6" />
         </a>
-
-        {/* Snapchat Icon */}
         <a
           href="https://www.snapchat.com"
           target="_blank"
@@ -75,8 +80,6 @@ const Footer = () => {
         >
           <FaSnapchat className="h-6 w-6" />
         </a>
-
-        {/* Facebook Icon */}
         <a
           href="https://www.facebook.com"
           target="_blank"
@@ -90,6 +93,17 @@ const Footer = () => {
       {/* Copyright Notice */}
       <div className="max-w-6xl mx-auto px-4 mt-4 border-t border-gray-700 pt-4 text-center text-sm text-gray-400">
         © Copyright Walker Supermarket 2025. All right reserved
+      </div>
+
+      {/* Scroll to Top Arrow */}
+      <div className="absolute right-4 bottom-4">
+        <button
+          onClick={scrollToTop}
+          className="bg-gray-700 text-white p-3 rounded-full hover:bg-gray-600 transition"
+          aria-label="Scroll to top"
+        >
+          <FaArrowUp className="h-6 w-6" />
+        </button>
       </div>
     </footer>
   );

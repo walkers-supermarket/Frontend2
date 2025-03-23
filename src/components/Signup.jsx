@@ -1,163 +1,101 @@
-
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import signupImage from "../assets/images/signupImage.svg";
+import { FcGoogle } from "react-icons/fc";
 
-const Signup = ({ signupImage }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
-  });
-  const [errors, setErrors] = useState({});
+const Register = () => {
+  const [name, setName] = useState("");
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Email is invalid";
-    if (!formData.password) newErrors.password = "Password is required";
-    else if (formData.password.length < 6)
-      newErrors.password = "Password must be at least 6 characters";
-    if (!formData.phone) newErrors.phone = "Phone number is required";
-    else if (!/^\d{10}$/.test(formData.phone))
-      newErrors.phone = "Phone number must be 10 digits";
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    const formErrors = validateForm();
-    if (Object.keys(formErrors).length === 0) {
-      console.log("Form submitted:", formData);
-      alert("Account created successfully!");
-      setFormData({ name: "", email: "", password: "", phone: "" });
+    if (name && emailOrPhone && password) {
+      console.log("Registering with:", { name, emailOrPhone, password });
+      // Add your registration logic here (e.g., API call)
     } else {
-      setErrors(formErrors);
+      alert("Please fill in all fields");
     }
   };
 
-  const handleGoogleSignIn = () => {
-    console.log("Sign up with Google");
-    alert("Google Sign-In clicked (placeholder)");
+  const handleGoogleSignUp = () => {
+    console.log("Signing up with Google");
+    // Add your Google sign-up logic here (e.g., Firebase Auth)
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="flex w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
-        {/* Left Side: Background Image */}
-        <div
-          className="hidden md:block w-1/2 bg-cover bg-center"
-          style={{
-            backgroundImage: signupImage ? `url(${signupImage})` : "none",
-          }}
-        ></div>
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen ">
+      {/* Left Section: Image */}
+      <div className="w-full md:w-1/2 flex justify-center p-4">
+        <img
+          src={signupImage}
+          alt="Phone and Shopping Cart"
+          className="max-w-full h-auto md:max-w-md"
+        />
+      </div>
 
-        {/* Right Side: Form */}
-        <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-2xl font-bold mb-6">Create an Account</h2>
-          <p className="text-gray-600 mb-6">Enter your details below</p>
-          <form onSubmit={handleSubmit}>
-            {/* Name Field */}
-            <div className="mb-4">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Name"
-                className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-black"
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-              )}
-            </div>
+      {/* Right Section: Registration Form */}
+      <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+        <h2 className="text-3xl font-bold mb-2">Create an account</h2>
+        <p className="text-gray-600 mb-6">Enter your details below</p>
 
-            {/* Email Field */}
-            <div className="mb-4">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email"
-                className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-black"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-              )}
-            </div>
-
-            {/* Password Field */}
-            <div className="mb-4">
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password"
-                className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-black"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-              )}
-            </div>
-
-            {/* Phone Number Field */}
-            <div className="mb-6">
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Phone Number"
-                className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-black"
-              />
-              {errors.phone && (
-                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-              )}
-            </div>
-
-            {/* Create Account Button */}
+        <form onSubmit={handleRegister} className="space-y-4">
+          <div>
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Email or Phone Number"
+              value={emailOrPhone}
+              onChange={(e) => setEmailOrPhone(e.target.value)}
+              className="w-[50%]  p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-[50%]  p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+          </div>
+          <div>
             <button
               type="submit"
-              className="w-full bg-red-500 text-white py-3 rounded mb-4 hover:bg-red-600 transition"
+              className="w-[50%]  bg-[#DB4444] text-white p-3 rounded hover:bg-red-700 transition"
             >
               Create Account
             </button>
-
-            {/* Sign Up with Google Button */}
+          </div>
+          <div>
             <button
               type="button"
-              onClick={handleGoogleSignIn}
-              className="w-full flex items-center justify-center gap-2 border border-gray-300 py-3 rounded mb-4 hover:bg-gray-100 transition"
+              onClick={handleGoogleSignUp}
+              className="w-[50%]  flex items-center justify-center space-x-2 border border-gray-300 p-3 rounded hover:bg-gray-100 transition"
             >
-              <img
-                src="https://www.google.com/favicon.ico"
-                alt="Google"
-                className="w-5 h-5"
-              />
-              Sign up with Google
+              <FcGoogle className="h-5 w-5" />
+              <span>Sign up with Google</span>
             </button>
-
-            {/* Already have an account? Log in */}
-            <p className="text-center text-gray-600">
-              Already have an account?{" "}
-              <Link to="/login" className="text-black underline">
+          </div>
+          <div className="text-start ml-14">
+            <p className="text-gray-600">
+              Already have account?{" "}
+              <a href="/login" className="text-[#DB4444] hover:underline">
                 Log in
-              </Link>
+              </a>
             </p>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );
 };
 
-export default Signup;
+export default Register;
