@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import categoryImage from "../assets/images/categoryImage.svg";
+import giantbread from "../assets/images/giantbread.svg";
 import rectangle from "../assets/images/rectangle.svg";
 
 const Categories = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const categories = [
-    { name: "Meats", image: categoryImage },
+    { name: "Meats", image: giantbread },
     { name: "Dairy", image: categoryImage },
     { name: "Sea Food", image: categoryImage }, 
     { name: "Breakfast Foods", image: categoryImage },

@@ -2,6 +2,7 @@
 import React from "react";
 import { StarIcon, HeartIcon, EyeIcon } from "@heroicons/react/24/outline";
 import categoryImage from "../assets/images/categoryImage.svg";
+import giantbread from "../assets/images/giantbread.svg";
 
 const BestSellers = () => {
   const products = [
@@ -12,7 +13,7 @@ const BestSellers = () => {
       originalPrice: 390,
       rating: 5,
       reviews: 65,
-      image: categoryImage,
+      image: giantbread,
     },
     {
       id: 2,

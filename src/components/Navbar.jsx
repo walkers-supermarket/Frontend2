@@ -6,13 +6,6 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import logo from "../assets/images/logo.svg";
-import React, { useState } from "react";
-// Import dropdown icons
-import user from "../assets/images/user.svg";
-import myOrderIcon from "../assets/images/myOrderIcon.svg";
-import myCancellationsIcon from "../assets/images/myCancellationsIcon.svg";
-import myReviewsIcon from "../assets/images/myReviewsIcon.svg";
-import logoutIcon from "../assets/images/logoutIcon.svg";
 
 const Navbar = () => {
   const customMenu = [
@@ -20,38 +13,6 @@ const Navbar = () => {
     { id: "contact", title: "Contact", url: "/contact" },
     { id: "about", title: "About", url: "/about" },
     { id: "signup", title: "Sign Up", url: "/signup" },
-  ];
-
-  // State to manage dropdown visibility
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  // Toggle dropdown visibility
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
-  };
-
-  // Dropdown menu items with icons
-  const dropdownItems = [
-    {
-      id: "manage-account",
-      title: "Manage My Account",
-      url: "/account",
-      icon: user,
-    },
-    { id: "my-order", title: "My Order", url: "/orders", icon: myOrderIcon },
-    {
-      id: "my-cancellations",
-      title: "My Cancellations",
-      url: "/cancellations",
-      icon: myCancellationsIcon,
-    },
-    {
-      id: "my-reviews",
-      title: "My Reviews",
-      url: "/reviews",
-      icon: myReviewsIcon,
-    },
-    { id: "logout", title: "Logout", url: "/logout", icon: logoutIcon },
   ];
 
   return (
@@ -110,36 +71,10 @@ const Navbar = () => {
               2
             </span>
           </Link>
-          {/* User Icon with Dropdown */}
-          <div className="relative">
-            <button
-              onClick={toggleDropdown}
-              className="icon account text-black focus:outline-none"
-            >
-              <UserIcon className="w-6 h-6" />
-            </button>
-            {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-[#3D3C3A] text-white rounded-lg shadow-lg z-10">
-                {dropdownItems.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={item.url}
-                    className="flex text-sm items-center px-4 py-2 hover:bg-gray-600 transition"
-                    onClick={() => setIsDropdownOpen(false)}
-                  >
-                    <div className="w-5 h-5 mr-2 flex items-center justify-center">
-                      <img
-                        src={item.icon}
-                        alt={`${item.title} Icon`}
-                        className="w-5 h-5"
-                      />
-                    </div>
-                    <span>{item.title}</span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* User Icon linked to /dashboard */}
+          <Link to="/dashboard" className="icon account text-black">
+            <UserIcon className="w-6 h-6" />
+          </Link>
         </div>
       </header>
     </div>
