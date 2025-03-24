@@ -7,10 +7,13 @@ import { FcGoogle } from "react-icons/fc";
 import { auth } from "../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { apiLogin } from "../services/auth";
+// Import eye icons from Heroicons
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; 
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [password, setPassword] = useState(""); // Add password state for controlled input
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -26,10 +29,8 @@ const Login = () => {
     }
     try {
       setLoading(true);
-      const formData = new FormData(e.target);
-      const emailOrPhone = formData.get("emailOrPhone");
-      const password = formData.get("password");
-      const response = await apiLogin({ emailOrPhone, password });
+      const payload = { emailOrPhone, password };
+      const response = await apiLogin(payload);
       console.log(response.data);
 
       if (response.status === 200) {
@@ -42,7 +43,7 @@ const Login = () => {
         text: "Welcome back!",
       });
 
-      navigate("/dashboard"); // Redirect to dashboard or another 
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -70,7 +71,7 @@ const Login = () => {
         text: `Welcome, ${user.displayName}!`,
       });
 
-      navigate("/dashboard"); // Redirect to dashboard or another page
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -81,6 +82,10 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -107,19 +112,34 @@ const Login = () => {
               id="emailOrPhone"
               name="emailOrPhone"
               placeholder="Email or Phone Number"
+              value={emailOrPhone}
+              onChange={(e) => setEmailOrPhone(e.target.value)}
               className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
-          {/* Password Input */}
-          <div>
+          {/* Password Input with Show/Hide Toggle */}
+          <div className="relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute right-94 top-1/2 transform -translate-y-1/2 mr-3 text-gray-600"
+            >
+              {showPassword ? (
+                <AiOutlineEye className="h-5 w-5" />
+              ) : (
+                <AiOutlineEyeInvisible className="h-5 w-5" />
+              )}
+            </button>
           </div>
 
           {/* Log In Button and Forget Password Link */}
