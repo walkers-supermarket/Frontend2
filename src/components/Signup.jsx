@@ -3,8 +3,8 @@ import signupImage from "../assets/images/signupImage.svg";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; 
 import { apiSignup } from "../services/auth";
-// Import Firebase Auth functions
 import { auth } from "../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
@@ -13,7 +13,7 @@ const Signup = () => {
   const [showpassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [emailOrPhone, setEmailOrPhone] = useState("");
-  const [password, setPassword] = useState(""); // Add password state
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -28,11 +28,6 @@ const Signup = () => {
     }
     try {
       setLoading(true);
-       const formData = new FormData(e.target);
-       const name = formData.get("Name");
-      const emailOrPhone = formData.get("emailOrPhone");
-       const password = formData.get("password");
-
       const payload = { name, emailOrPhone, password };
       const response = await apiSignup(payload);
       Swal.fire({
@@ -54,7 +49,7 @@ const Signup = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setShowPassword(!showpassword);
   };
 
   const handleGoogleSignUp = async () => {
@@ -64,13 +59,11 @@ const Signup = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Optionally, send the user data to your backend
       const payload = {
         name: user.displayName,
         emailOrPhone: user.email,
-        // You might not need a password for Google Sign-Up
       };
-      await apiSignup(payload); // Adjust this based on your backend requirements
+      await apiSignup(payload);
 
       Swal.fire({
         icon: "success",
@@ -78,7 +71,7 @@ const Signup = () => {
         text: `Welcome, ${user.displayName}!`,
       });
 
-      navigate("/dashboard"); // Redirect to dashboard or another page
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       Swal.fire({
@@ -138,14 +131,18 @@ const Signup = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-[50%] p-3 pr-12 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute right-0 top-3 text-gray-600"
+              className="absolute right-95 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800"
             >
-              {showpassword ? "Hide" : "Show"}
+              {showpassword ? (
+                <AiOutlineEye className="h-5 w-5" />
+              ) : (
+                <AiOutlineEyeInvisible className="h-5 w-5" />
+              )}
             </button>
           </div>
           <div>
