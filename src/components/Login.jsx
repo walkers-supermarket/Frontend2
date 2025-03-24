@@ -1,10 +1,90 @@
-import React from "react";
-
+import React, { useState } from "react";
 import signupImage from "../assets/images/signupImage.svg";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
+// Import Firebase Auth functions
+import { auth } from "../firebase";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { apiLogin } from "../services/auth";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!emailOrPhone || !password) {
+      Swal.fire({
+        icon: "warning",
+        title: "Insert your details",
+        text: "Please insert your email/phone and password to proceed.",
+      });
+      return;
+    }
+    try {
+      setLoading(true);
+      const formData = new FormData(e.target);
+      const emailOrPhone = formData.get("emailOrPhone");
+      const password = formData.get("password");
+      const response = await apiLogin({ emailOrPhone, password });
+      console.log(response.data);
+
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.accessToken);
+      }
+
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: "Welcome back!",
+      });
+
+      navigate("/dashboard"); // Redirect to dashboard or another 
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: "Please check your details and try again.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      setLoading(true);
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Optionally, send the user data to your backend for login
+      // For now, we'll just show a success message
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: `Welcome, ${user.displayName}!`,
+      });
+
+      navigate("/dashboard"); // Redirect to dashboard or another page
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Google Login Failed",
+        text: error.message,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen ">
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen">
       {/* Left Section: Image */}
       <div className="w-full md:w-1/2 flex justify-center p-4">
         <img
@@ -19,11 +99,13 @@ const Login = () => {
         <h2 className="text-3xl font-bold mb-2">Log in to Exclusive</h2>
         <p className="text-gray-600 mb-6">Enter your details below</p>
 
-        <form className="space-y-4">
+        <form onSubmit={handleLogin} className="space-y-4">
           {/* Email or Phone Number Input */}
           <div>
             <input
               type="text"
+              id="emailOrPhone"
+              name="emailOrPhone"
               placeholder="Email or Phone Number"
               className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
@@ -33,22 +115,38 @@ const Login = () => {
           <div>
             <input
               type="password"
+              id="password"
+              name="password"
               placeholder="Password"
               className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
 
           {/* Log In Button and Forget Password Link */}
-          <div className=" w-[50%] flex justify-between items-center">
+          <div className="w-[50%] flex justify-between items-center">
             <button
               type="submit"
               className="bg-[#DB4444] text-white px-6 py-3 rounded hover:bg-red-700 transition"
+              disabled={loading}
             >
-              Log In
+              {loading ? "Loading..." : "Log In"}
             </button>
             <a href="/forgot-password" className="text-red-600 hover:underline">
               Forget Password?
             </a>
+          </div>
+
+          {/* Google Sign-In Button */}
+          <div>
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-[50%] flex items-center justify-center space-x-2 border border-gray-300 p-3 rounded hover:bg-gray-100 transition"
+              disabled={loading}
+            >
+              <FcGoogle className="h-5 w-5" />
+              <span>{loading ? "Loading..." : "Log in with Google"}</span>
+            </button>
           </div>
         </form>
       </div>
