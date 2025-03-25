@@ -132,7 +132,7 @@ const Login = () => {
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute right-94 top-1/2 transform -translate-y-1/2 mr-3 text-gray-600"
+              className="absolute right-80 top-1/2 transform -translate-y-1/2 mr-3 text-gray-600"
             >
               {showPassword ? (
                 <AiOutlineEye className="h-5 w-5" />
@@ -167,6 +167,14 @@ const Login = () => {
               <FcGoogle className="h-5 w-5" />
               <span>{loading ? "Loading..." : "Log in with Google"}</span>
             </button>
+          </div>
+          <div className="text-start ml-14">
+            <p className="text-gray-600">
+              Don't have an account?{" "}
+              <a href="/signup" className="text-[#DB4444] hover:underline">
+                Sign up
+              </a>
+            </p>
           </div>
         </form>
       </div>

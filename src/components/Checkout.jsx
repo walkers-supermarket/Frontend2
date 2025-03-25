@@ -242,15 +242,7 @@ const Checkout = () => {
                   <img src={paypal} alt="Paypal" className="  w-8 h-6" />
                 </div>
               </div>
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="payment"
-                  value="cash"
-                  className="mr-2 accent-[#1d1818] w-5 h-5"
-                />
-                <span className="text-gray-800">Cash on delivery</span>
-              </div>
+             
             </div>
             {/* Coupon Code */}
             <div className="flex gap-2 mt-4">

@@ -1,16 +1,22 @@
-import React from 'react'
-import Navbar2 from '../components/Navbar2';
-import Footer from '../components/Footer';
-import Single from '../components/Single';
+import React from "react";
+import Navbar from "../components/Navbar";
+import Single from "../components/Single";
+import Footer from "../components/Footer";
+import { ScrollRestoration } from "react-router-dom";
 
 const SinglePage = () => {
   return (
-      <div>
-          <Navbar2 />
-          <Single/>
-          <Footer/>
+    <div className="overflow-x-hidden">
+      <ScrollRestoration />
+      <Navbar />
+      <div className="mt-4">
+        <Single />
+      </div>
+      <div className="mt-4">
+        <Footer />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default SinglePage;

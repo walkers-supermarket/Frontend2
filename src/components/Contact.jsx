@@ -40,7 +40,7 @@ const Contact = () => {
       </div>
 
       {/* Main Content: Two Columns */}
-          <div className="max-w-6xl  mb-[7%] mx-auto px-4 flex flex-col md:flex-row gap-8">
+      <div className="max-w-6xl  mb-[7%] mx-auto px-4 flex flex-col md:flex-row gap-8">
         {/* Left Column: Contact Information */}
         <div className="md:w-1/3">
           {/* Call To Us Section */}
@@ -72,7 +72,13 @@ const Contact = () => {
             <p className="text-gray-600">
               Fill out our form and we will contact you within 24 hours.
             </p>
-            <p className="text-gray-600 mt-2">Emails: support@exclusive.com</p>
+            <a
+              href="mailto:ketema.w@walkerssupermarket.co.uk"
+              className="text-gray-600 hover:text-gray-700 transition"
+              aria-label="Email us at ketema.w@walkerssupermarket.co.uk"
+            >
+              ketema.w@walkerssupermarket.co.uk
+            </a>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 import React from "react";
 // Import social media icons and arrow icon from react-icons
-import { FaInstagram, FaSnapchat, FaFacebook, FaArrowUp } from "react-icons/fa";
+import { FaInstagram, FaTiktok, FaFacebook, FaArrowUp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   // Function to scroll to the top of the page
@@ -35,18 +36,65 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-bold mb-4">Contact</h3>
           <p className="text-sm mb-2">The company physical address</p>
-          <p className="text-sm mb-2">exclusive@gmail.com</p>
-          <p className="text-sm">+88015-88888-9999</p>
+          <p className="text-sm mb-2">
+            <a
+              href="mailto:ketema.w@walkerssupermarket.co.uk"
+              className="text-white hover:text-gray-400 transition"
+              aria-label="Email us at ketema.w@walkerssupermarket.co.uk"
+            >
+              ketema.w@walkerssupermarket.co.uk
+            </a>
+          </p>
         </div>
 
         {/* Column 3: My Account */}
         <div>
           <h3 className="text-lg font-bold mb-4">My Account</h3>
           <ul className="text-sm space-y-2">
-            <li>Login / Register</li>
-            <li>Cart</li>
-            <li>Wishlist</li>
-            <li>Shop</li>
+            <li>
+              <Link
+                to="/login"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to Login page"
+              >
+                Login
+              </Link>{" "}
+              /{" "}
+              <Link
+                to="/signup"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to Register page"
+              >
+                Register
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/cart"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to Cart page"
+              >
+                Cart
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/wishlist"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to Wishlist page"
+              >
+                Wishlist
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/shop"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to Shop page"
+              >
+                Shop
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -54,10 +102,42 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-bold mb-4">Quick Link</h3>
           <ul className="text-sm space-y-2">
-            <li>About</li>
-            <li>Privacy Policy</li>
-            <li>Terms Of Use</li>
-            <li>FAQ</li>
+            <li>
+              <Link
+                to="/about"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to About page"
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/privacy-policy"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to Privacy Policy page"
+              >
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/terms-of-use"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to Terms of Use page"
+              >
+                Terms Of Use
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/faq"
+                className="text-white hover:text-gray-400 transition"
+                aria-label="Go to FAQ page"
+              >
+                FAQ
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -65,26 +145,29 @@ const Footer = () => {
       {/* Social Media Icons */}
       <div className="max-w-6xl mx-auto px-4 mt-8 flex justify-center space-x-6">
         <a
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/walkerssupermarket?igsh=MTRjaWk2Z2xnYzJvMw%3D%3D&utm_source=qr"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-gray-400 transition"
+          aria-label="Visit our Instagram profile"
         >
           <FaInstagram className="h-6 w-6" />
         </a>
         <a
-          href="https://www.snapchat.com"
+          href="https://www.tiktok.com/@walkerssupermarket?_t=ZN-8uycjni5Hs6&_r=1"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-gray-400 transition"
+          aria-label="Visit our TikTok profile"
         >
-          <FaSnapchat className="h-6 w-6" />
+          <FaTiktok className="h-6 w-6" />
         </a>
         <a
-          href="https://www.facebook.com"
+          href="https://www.facebook.com/share/16ArmvjNp5/?mibextid=wwXIfr"
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:text-gray-400 transition"
+          aria-label="Visit our Facebook profile"
         >
           <FaFacebook className="h-6 w-6" />
         </a>
@@ -92,7 +175,7 @@ const Footer = () => {
 
       {/* Copyright Notice */}
       <div className="max-w-6xl mx-auto px-4 mt-4 border-t border-gray-700 pt-4 text-center text-sm text-gray-400">
-        © Copyright Walker Supermarket 2025. All right reserved
+        © Copyright Walker Supermarket 2025. All rights reserved
       </div>
 
       {/* Scroll to Top Arrow */}
