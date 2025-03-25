@@ -1,13 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom"; // Import Outlet
 import Sidebar from "../components/Sidebar";
-import Navbar2 from "../components/Navbar2";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const DashboardLayout = () => {
     return (
         <div>
-            <Navbar2/>
+            <Navbar/>
         <div className="flex min-h-screen">
           {/* Sidebar */}
           <Sidebar />

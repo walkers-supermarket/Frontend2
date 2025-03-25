@@ -1,16 +1,22 @@
-import React from 'react'
-import Navbar2 from '../components/Navbar2';
-import Footer from '../components/Footer';
-import Contact from '../components/Contact';
+import React from "react";
+import Navbar from "../components/Navbar";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
+import { ScrollRestoration } from "react-router-dom";
 
 const ContactPage = () => {
   return (
-      <div>
-          <Navbar2 />
-          <Contact />
-          <Footer/>
+    <div className="overflow-x-hidden">
+      <ScrollRestoration />
+      <Navbar />
+      <div className="mt-4">
+        <Contact />
+      </div>
+      <div className="mt-4">
+        <Footer />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default ContactPage;

@@ -1,16 +1,22 @@
-import React from 'react'
-import Navbar2 from '../components/Navbar2';
-import Checkout from '../components/Checkout';
-import Footer from '../components/Footer';
+import React from "react";
+import Navbar from "../components/Navbar";
+import Checkout from "../components/Checkout";
+import Footer from "../components/Footer";
+import { ScrollRestoration } from "react-router-dom";
 
 const CheckoutPage = () => {
   return (
-      <div>
-          <Navbar2 />
-          <Checkout />
-          <Footer/>
+    <div className="overflow-x-hidden">
+      <ScrollRestoration />
+      <Navbar />
+      <div className="mt-4">
+        <Checkout />
+      </div>
+      <div className="mt-4">
+        <Footer />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default CheckoutPage;

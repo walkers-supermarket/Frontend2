@@ -136,7 +136,7 @@ const Signup = () => {
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute right-95 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800"
+              className="absolute right-80 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800"
             >
               {showpassword ? (
                 <AiOutlineEye className="h-5 w-5" />

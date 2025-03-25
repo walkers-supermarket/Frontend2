@@ -1,16 +1,22 @@
-import React from 'react'
-import Navbar2 from '../components/Navbar2';
-import Footer from '../components/Footer';
-import SignUp from '../components/Signup'
+import React from "react";
+import Navbar from "../components/Navbar";
+import SignUp from "../components/Signup";
+import Footer from "../components/Footer";
+import { ScrollRestoration } from "react-router-dom";
 
 const SignupPage = () => {
   return (
-      <div>
-          <Navbar2 />
-          <SignUp />
-          <Footer/>
+    <div className="overflow-x-hidden">
+      <ScrollRestoration />
+      <Navbar />
+      <div className="mt-4">
+        <SignUp />
+      </div>
+      <div className="mt-4">
+        <Footer />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default SignupPage;

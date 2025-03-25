@@ -1,16 +1,22 @@
-import React from 'react'
-import Navbar2 from '../components/Navbar2';
-import Footer from '../components/Footer';
-import Login from '../components/Login';
+import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Login from "../components/Login";
+import { ScrollRestoration } from "react-router-dom";
 
 const LoginPage = () => {
   return (
-      <div>
-          <Navbar2 />
-          <Login />
-          <Footer/>
+    <div className="overflow-x-hidden">
+      <ScrollRestoration />
+      <Navbar />
+      <div className="mt-4">
+        <Login />
+      </div>
+      <div className="mt-4">
+        <Footer />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default LoginPage;
