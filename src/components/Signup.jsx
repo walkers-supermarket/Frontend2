@@ -3,7 +3,7 @@ import signupImage from "../assets/images/signupImage.svg";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; 
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { apiSignup } from "../services/auth";
 import { auth } from "../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -11,24 +11,18 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [showpassword, setShowPassword] = useState(false);
-  const [name, setName] = useState("");
-  const [emailOrPhone, setEmailOrPhone] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (!name || !emailOrPhone || !password) {
-      Swal.fire({
-        icon: "warning",
-        title: "Insert your details",
-        text: "Please insert your details to proceed.",
-      });
-      return;
-    }
     try {
       setLoading(true);
-      const payload = { name, emailOrPhone, password };
+      const formData = new FormData(e.target);
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const password = formData.get("password");
+      const payload = { name, email, password };
+
       const response = await apiSignup(payload);
       Swal.fire({
         icon: "success",
@@ -37,11 +31,11 @@ const Signup = () => {
       });
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log("Sign Up Error:", error.message, error.response?.data);
       Swal.fire({
         icon: "error",
         title: "Sign Up Failed",
-        text: "Please check your details and try again.",
+        text: error.message || "Please check your details and try again.",
       });
     } finally {
       setLoading(false);
@@ -60,8 +54,10 @@ const Signup = () => {
       const user = result.user;
 
       const payload = {
+        role: "user", // Add default role
         name: user.displayName,
-        emailOrPhone: user.email,
+        email: user.email,
+        password: "google-authenticated-user", // Add a dummy password (temporary fix)
       };
       await apiSignup(payload);
 
@@ -73,7 +69,7 @@ const Signup = () => {
 
       navigate("/dashboard");
     } catch (error) {
-      console.log(error);
+      console.log("Google Sign Up Error:", error.message);
       Swal.fire({
         icon: "error",
         title: "Google Sign Up Failed",
@@ -107,19 +103,17 @@ const Signup = () => {
               id="name"
               name="name"
               placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              required
               className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
           <div>
             <input
               type="text"
-              id="emailOrPhone"
-              name="emailOrPhone"
+              id="email"
+              name="email"
               placeholder="Email or Phone Number"
-              value={emailOrPhone}
-              onChange={(e) => setEmailOrPhone(e.target.value)}
+              required
               className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
@@ -129,8 +123,6 @@ const Signup = () => {
               id="password"
               name="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               className="w-[50%] p-3 pr-12 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <button

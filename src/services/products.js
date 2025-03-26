@@ -10,4 +10,4 @@ export const apiSearchProduct = async (searchTerm) =>
         `/adverts?filter={"title":{"$regex":"${searchTerm}","$options":"i"}}`
     );
 
-    //replace with regex url Firdause gives you
+    //replace with regex url Firdaus gives you
