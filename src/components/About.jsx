@@ -134,7 +134,7 @@ const About = () => {
             <strong>helping us reduce food waste </strong> and support a{" "}
             <strong>more sustainable future</strong>.
           </p>
-          <p>
+          <p className="text-gray-600 leading-relaxed mb-4">
             <strong>🌍Eat well, save money, and help the planet!</strong> Order
             your mystery box today, and why not combine it with Fibre Fridays.
           </p>
@@ -149,8 +149,6 @@ const About = () => {
           />
         </div>
       </div>
-
-    
     </div>
   );
 };
