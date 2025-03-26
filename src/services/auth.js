@@ -7,4 +7,4 @@ export const apiProfile = async () => {
     return await apiClient.get("/users/me")
 };
 
-export const apiLogin = async (payload) => apiClient.post("/user/login", payload);
+export const apiLogin = async (payload) => apiClient.post("/users/login", payload);
