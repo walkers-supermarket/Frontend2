@@ -1,11 +1,11 @@
-// src/components/Hero.jsx
 import React, { useState, useEffect } from "react";
-import { ChevronRightIcon } from "@heroicons/react/16/solid";
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/16/solid";
 import { Link } from "react-router-dom";
 import CarouselImage from "../assets/images/CarouselImage.svg";
 
 const Hero = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const slides = [
     {
@@ -18,16 +18,8 @@ const Hero = () => {
       buttonText: "Browse Now",
       bgColor: "bg-black",
     },
-    {
-      title: "Local Farm Fresh",
-      buttonText: "Discover",
-      bgColor: "bg-black",
-    },
-    {
-      title: "Spring Specials",
-      buttonText: "See Offers",
-      bgColor: "bg-black",
-    },
+    { title: "Local Farm Fresh", buttonText: "Discover", bgColor: "bg-black" },
+    { title: "Spring Specials", buttonText: "See Offers", bgColor: "bg-black" },
     {
       title: "Seasonal Picks",
       buttonText: "Shop Seasonal",
@@ -36,16 +28,67 @@ const Hero = () => {
   ];
 
   const menuItems = [
-    { name: "kitchen staples", hasSubmenu: false },
-    { name: "Best of British", hasSubmenu: false },
-    { name: "Meat & Fish", hasSubmenu: true },
-    { name: "Fridge & freezer", hasSubmenu: true },
-    { name: "Assortments", hasSubmenu: true },
-    { name: "Uk Farmers", hasSubmenu: true },
-    { name: "Fruits & vegetables", hasSubmenu: true },
-    { name: "Super foods", hasSubmenu: true },
-    { name: "Seasonal fruits and veg", hasSubmenu: true },
-    { name: "Snacks", hasSubmenu: true },
+    { name: "Kitchen staples", path: "/kitchen-staples", hasSubmenu: false },
+    { name: "Best of British", path: "/best-of-british", hasSubmenu: false },
+    {
+      name: "Meat & Fish",
+      hasSubmenu: true,
+      subItems: [
+        { name: "Beef", path: "/meat-fish/beef" },
+        { name: "Chicken", path: "/meat-fish/chicken" },
+      ],
+    },
+    {
+      name: "Fridge & freezer",
+      hasSubmenu: true,
+      subItems: [
+        { name: "Dairy", path: "/fridge-freezer/dairy" },
+        { name: "Frozen Foods", path: "/fridge-freezer/frozen" },
+      ],
+    },
+    {
+      name: "Assortments",
+      hasSubmenu: true,
+      subItems: [{ name: "Gift Packs", path: "/assortments/gift-packs" }],
+    },
+    {
+      name: "UK Farmers",
+      hasSubmenu: true,
+      subItems: [{ name: "Organic honey", path: "/uk-farmers" }],
+    },
+    {
+      name: "Fruits & vegetables",
+      hasSubmenu: true,
+      subItems: [
+        { name: "Apples", path: "/fruits-vegetables/apples" },
+        { name: "Carrots", path: "/fruits-vegetables/carrots" },
+      ],
+    },
+    {
+      name: "Super foods",
+      hasSubmenu: true,
+      subItems: [
+        { name: "Oats", path: "/super-foods/oats" },
+        { name: "Chia", path: "/super-foods/chia" },
+        { name: "Quinoa", path: "/super-foods/chia" },
+      ],
+    },
+    {
+      name: "Seasonal fruits and veg",
+      hasSubmenu: true,
+      subItems: [
+        { name: "Mangos", path: "/seasonal-fruits-veg/mangoes" },
+        { name: "Okra", path: "/seasonal-fruits-veg/okra" },
+      ],
+    },
+    {
+      name: "Snacks",
+      hasSubmenu: true,
+      subItems: [
+        { name: "Chips", path: "/snacks/chips" },
+        { name: "Nuts", path: "/snacks/nuts" },
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -56,26 +99,58 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  const handleDotClick = (index) => {
-    setActiveSlide(index);
+  const toggleDropdown = (index) => {
+    setOpenDropdown(openDropdown === index ? null : index);
+  };
+
+  const handleDotClick = (dotIndex) => {
+    setActiveSlide(dotIndex);
   };
 
   return (
-    <div className="flex  w-full">
-      <div className="w-[20%] ml-[6%] bg-white p-4  border-gray-200 border-r">
+    <div className="flex w-full">
+      <div className="w-[20%] ml-[6%] bg-white p-4 border-gray-200 border-r h-[500px] overflow-auto">
         <ul className="space-y-4">
           {menuItems.map((item, index) => (
-            <li
-              key={index}
-              className="flex items-center justify-between cursor-pointer"
-            >
-              <span className="text-gray-800 font-medium">{item.name}</span>
-              {item.hasSubmenu && (
-                <ChevronRightIcon
-                  width={16}
-                  height={16}
-                  className="text-gray-500"
-                />
+            <li key={index} className="relative">
+              <div
+                className="flex items-center justify-between cursor-pointer"
+                onClick={() => item.hasSubmenu && toggleDropdown(index)}
+              >
+                <Link
+                  to={item.path || "#"}
+                  className="text-gray-800 font-medium hover:underline"
+                >
+                  {item.name}
+                </Link>
+                {item.hasSubmenu &&
+                  (openDropdown === index ? (
+                    <ChevronDownIcon
+                      width={16}
+                      height={16}
+                      className="text-gray-500"
+                    />
+                  ) : (
+                    <ChevronRightIcon
+                      width={16}
+                      height={16}
+                      className="text-gray-500"
+                    />
+                  ))}
+              </div>
+              {item.hasSubmenu && openDropdown === index && (
+                <ul className="ml-4 mt-2 space-y-2 border-l border-gray-300 pl-2">
+                  {item.subItems.map((subItem, subIndex) => (
+                    <li key={subIndex}>
+                      <Link
+                        to={subItem.path}
+                        className="text-gray-700 hover:underline"
+                      >
+                        {subItem.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               )}
             </li>
           ))}
@@ -83,7 +158,7 @@ const Hero = () => {
       </div>
 
       <div className="w-3/4 relative">
-        <div className="relative h-[80%] max-w-[80%] mt-[5%] mx-[10%] my-auto overflow-hidden">
+        <div className="relative h-[68%] max-w-[80%] mt-[5%] mx-[10%] my-auto overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-in-out h-full"
             style={{ transform: `translateX(-${activeSlide * 100}%)` }}
@@ -138,7 +213,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    
     </div>
   );
 };

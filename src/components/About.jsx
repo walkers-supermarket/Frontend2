@@ -1,17 +1,11 @@
 import React from "react";
 // Import the main image
 import aboutImage from "../assets/images/aboutImage.svg";
-import Services from "../assets/images/Services.svg";
-import services1 from "../assets/images/services1.svg";
-import services2 from "../assets/images/services2.svg";
-import services3 from "../assets/images/services3.svg";
-import services4 from "../assets/images/services4.svg";
-import services5 from "../assets/images/services5.svg";
-import services6 from "../assets/images/services6.svg";
+
 
 const About = () => {
   return (
-    <div className="py-12 bg-white">
+    <div className="py-12 bg-[#FFF0E0]">
       {/* Breadcrumb Navigation */}
       <div className="max-w-6xl mx-auto px-4 mb-8">
         <nav className="text-gray-500 text-sm">
