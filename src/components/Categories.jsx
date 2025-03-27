@@ -55,7 +55,7 @@ const Categories = () => {
   };
 
   return (
-    <section className="py-12 border-b border-gray-200 w-[80%] mx-auto my-auto bg-white">
+    <section className="py-12 border-b mt-[-7%] border-gray-200 w-[80%] mx-auto my-auto bg-white">
       <div className="container mx-auto px-4">
         {/* Categories Label */}
         <div className="mb-4 flex">

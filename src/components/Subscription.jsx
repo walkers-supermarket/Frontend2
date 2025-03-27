@@ -7,7 +7,7 @@ import sitbackImage from "../assets/images/sitbackImage.svg";
 const Subscription = () => {
   return (
     <section className="py-12">
-      <div className="container mx-auto border-b border-t border-gray-200 px-4 text-center">
+      <div className="container mx-auto mt-[-8%] border-b border-t border-gray-200 px-4 text-center">
         {/* Header */}
         <h2 className="text-3xl mt-[3%] font-bold text-gray-800 mb-4">
           Our Subscription Programme
