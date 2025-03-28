@@ -103,14 +103,37 @@ const ShopAndSave = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const cardsPerPage = 4; // Number of cards to show at a time (md and above)
 
-  // Navigation handlers
+  // State for quantities
+  const [quantities, setQuantities] = useState({});
+
+  // Navigation handlers with looping
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - cardsPerPage, 0));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0
+        ? products.length - cardsPerPage
+        : prevIndex - cardsPerPage
+    );
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex + cardsPerPage, products.length - cardsPerPage)
+      prevIndex >= products.length - cardsPerPage ? 0 : prevIndex + cardsPerPage
+    );
+  };
+
+  // Quantity handlers
+  const handleQuantityChange = (productId, change) => {
+    setQuantities((prev) => ({
+      ...prev,
+      [productId]: Math.max(1, (prev[productId] || 1) + change),
+    }));
+  };
+
+  const handleAddToCart = (productId) => {
+    console.log(
+      `Added product ${productId} to cart with quantity ${
+        quantities[productId] || 1
+      }`
     );
   };
 
@@ -154,7 +177,6 @@ const ShopAndSave = () => {
       {/* Header with red notice */}
       <div className="mb-4">
         <div className="flex items-center mb-2">
-          
           <div className="mb-4 flex">
             <div>
               <img src={rectangle} alt="rectangle" className="w-4" />
@@ -169,10 +191,7 @@ const ShopAndSave = () => {
           <div className="flex space-x-2">
             <button
               onClick={handlePrev}
-              disabled={currentIndex === 0}
-              className={`border rounded-full p-2 flex items-center justify-center ${
-                currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className="border rounded-full p-2 flex items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -191,12 +210,7 @@ const ShopAndSave = () => {
             </button>
             <button
               onClick={handleNext}
-              disabled={currentIndex >= products.length - cardsPerPage}
-              className={`border rounded-full p-2 flex items-center justify-center ${
-                currentIndex >= products.length - cardsPerPage
-                  ? "opacity-50 cursor-not-allowed"
-                  : ""
-              }`}
+              className="border rounded-full p-2 flex items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -229,7 +243,7 @@ const ShopAndSave = () => {
             <div key={product.id} className="p-2 rounded relative">
               {/* Wishlist and quick view buttons */}
               <div className="absolute top-2 right-2 flex flex-col space-y-2">
-                <button className="bg-white rounded-full p-1 shadow-sm">
+                <button className="bg-white mr-2 mt-1 rounded-full p-1 shadow-sm">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
@@ -245,7 +259,7 @@ const ShopAndSave = () => {
                     />
                   </svg>
                 </button>
-                <button className="bg-white rounded-full p-1 shadow-sm">
+                <button className="bg-white mr-2 mt-1 rounded-full p-1 shadow-sm">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
@@ -303,6 +317,32 @@ const ShopAndSave = () => {
                   <span className="text-xs text-gray-500 ml-1">
                     ({product.reviews})
                   </span>
+                </div>
+                {/* Quantity controls and Add to Cart button */}
+                <div className="mt-2">
+                  <div className="flex items-center justify-center space-x-24">
+                    <button
+                      onClick={() => handleQuantityChange(product.id, -1)}
+                      className="px-2 bg-gray-200 rounded"
+                    >
+                      -
+                    </button>
+                    <span className="text-sm font-semibold">
+                      {quantities[product.id] || 1}
+                    </span>
+                    <button
+                      onClick={() => handleQuantityChange(product.id, 1)}
+                      className="px-2 bg-gray-200 rounded"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => handleAddToCart(product.id)}
+                    className="mt-2 w-full bg-black text-white py-1 text-sm rounded hover:bg-gray-800"
+                  >
+                    Add To Cart
+                  </button>
                 </div>
               </div>
             </div>
