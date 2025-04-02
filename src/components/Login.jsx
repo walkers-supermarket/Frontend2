@@ -3,17 +3,15 @@ import signupImage from "../assets/images/signupImage.svg";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
-// Import Firebase Auth functions
 import { auth } from "../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { apiLogin } from "../services/auth";
-// Import eye icons from Heroicons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; 
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [emailOrPhone, setEmailOrPhone] = useState("");
-  const [password, setPassword] = useState(""); // Add password state for controlled input
+  const [password, setPassword] = useState(""); 
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -63,8 +61,7 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Optionally, send the user data to your backend for login
-      // For now, we'll just show a success message
+  
       Swal.fire({
         icon: "success",
         title: "Login Successful",

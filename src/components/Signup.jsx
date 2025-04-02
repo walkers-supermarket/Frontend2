@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import signupImage from "../assets/images/signupImage.svg";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { FcGoogle } from "react-icons/fc";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { apiSignup } from "../services/auth";
 import { auth } from "../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import CustomInput from "./CustomInput";
+import CustomButton from "./CustomButton";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
-  const [showpassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -43,7 +43,7 @@ const Signup = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showpassword);
+    setShowPassword(!showPassword);
   };
 
   const handleGoogleSignUp = async () => {
@@ -54,10 +54,10 @@ const Signup = () => {
       const user = result.user;
 
       const payload = {
-        role: "user", // Add default role
+        role: "user",
         name: user.displayName,
         email: user.email,
-        password: "google-authenticated-user", // Add a dummy password (temporary fix)
+        password: "google-authenticated-user",
       };
       await apiSignup(payload);
 
@@ -98,64 +98,52 @@ const Signup = () => {
 
         <form onSubmit={handleRegister} className="space-y-4">
           <div>
-            <input
+            <CustomInput
               type="text"
               id="name"
               name="name"
               placeholder="Name"
               required
-              className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
           <div>
-            <input
+            <CustomInput
               type="text"
               id="email"
               name="email"
               placeholder="Email or Phone Number"
               required
-              className="w-[50%] p-3 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
-          <div className="relative">
-            <input
-              type={showpassword ? "text" : "password"}
+          <div>
+            <CustomInput
+              type="password"
               id="password"
               name="password"
               placeholder="Password"
-              className="w-[50%] p-3 pr-12 border-b border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+              showPassword={showPassword}
+              togglePasswordVisibility={togglePasswordVisibility}
             />
-            <button
-              type="button"
-              onClick={togglePasswordVisibility}
-              className="absolute right-80 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800"
-            >
-              {showpassword ? (
-                <AiOutlineEye className="h-5 w-5" />
-              ) : (
-                <AiOutlineEyeInvisible className="h-5 w-5" />
-              )}
-            </button>
           </div>
           <div>
-            <button
+            <CustomButton
               type="submit"
-              className="w-[50%] bg-[#DB4444] text-white p-3 rounded hover:bg-red-700 transition"
               disabled={loading}
+              className="w-[50%] p-3"
             >
               {loading ? "Loading..." : "Create Account"}
-            </button>
+            </CustomButton>
           </div>
           <div>
-            <button
+            <CustomButton
               type="button"
               onClick={handleGoogleSignUp}
-              className="w-[50%] flex items-center justify-center space-x-2 border border-gray-300 p-3 rounded hover:bg-gray-100 transition"
               disabled={loading}
+              isGoogleButton
+              className="w-[50%] p-3"
             >
-              <FcGoogle className="h-5 w-5" />
-              <span>{loading ? "Loading..." : "Sign up with Google"}</span>
-            </button>
+              {loading ? "Loading..." : "Sign up with Google"}
+            </CustomButton>
           </div>
           <div className="text-start ml-14">
             <p className="text-gray-600">
